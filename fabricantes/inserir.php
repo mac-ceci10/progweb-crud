@@ -1,3 +1,20 @@
+<?php
+
+if( isset($_POST['inserir']) ){
+    require "../includes/funcoes-fabricantes.php";
+
+    $nome = filter_input (
+        INPUT_POST,
+        'nome',
+        FILTER_SANITIZE_SPECIAL_CHARS
+    );
+
+    inserirFabricante($conexao, $nome);
+    header("location:listar.php");
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,7 +42,6 @@
         </p>	    
         <button name="inserir">Inserir fabricante</button>
 	</form>	
-
 </div>
 
 </body>
