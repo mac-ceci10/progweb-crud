@@ -1,18 +1,16 @@
 # Programação PHP com SQL
 
-Fabricantes; funções para crud de dados
+Fabricantes: funções para crud de dados
+
 - lerFabricantes
-- lerFabricante
 - inserirFabricante
+- lerUmFabricante
 - atualizarFabricante
 - excluirFabricante
 
 Produtos: funções para crud de dados
 - lerProdutos
-- lerFabricante
 - inserirProduto
+- lerUmProduto
 - atualizarProduto
 - excluirProduto
-
-//<pre><?=var_dump($listaFabricantes)?></pre>
-teste com php
