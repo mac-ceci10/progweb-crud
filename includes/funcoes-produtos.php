@@ -1,6 +1,5 @@
 <?php
 // funcoes-produto.php
-
 require "conecta.php";
 
 function lerProduto($conexao){
@@ -43,6 +42,8 @@ function lerProduto($conexao){
                 //var_dump(lerProdutos($conexao)); // teste
 
 
+
+
 function inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId){
     //em cima a gente cria os nomes
     $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricante_id) VALUES('$nome', $preco, $quantidade, '$descricao', $fabricanteId)";
@@ -53,9 +54,11 @@ function inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabri
 
 
 
+
+
 function lerUmProduto($conexao, $id){
     // Montagem do comando SQL com o parâmetro id
-    $sql = "SELECT id, nome FROM produtos WHERE id = $id";
+    $sql = "SELECT id, nome, preco, quantidade, descricao, fabricante_id FROM produtos WHERE id = $id";
     
     // Execução do comando e armazenamento do resultado
     $resultado = mysqli_query($conexao, $sql) 
@@ -64,6 +67,7 @@ function lerUmProduto($conexao, $id){
     // Retornando para fora da função o resultado como array assoc.
     return mysqli_fetch_assoc($resultado);
 } // final lerUmProduto
+    // Essa função retorna um ARRAY
 
 
 

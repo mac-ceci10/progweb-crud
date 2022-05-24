@@ -17,8 +17,8 @@ if( isset($_POST['inserir']) ){
 inserirProduto ($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
 header("location:listar.php"); // redirecionamento
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -49,13 +49,14 @@ header("location:listar.php"); // redirecionamento
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
 
-        <!-- Obs: Nesta parte estamos resgatando os dados da tabela FABRICANTES para se completar as informações do formulário de produtos. -->
+            <option value=""></option>
+            <!-- Obs: Nesta parte estamos resgatando os dados da tabela FABRICANTES para se completar as informações do formulário de produtos. -->
             <?php 
             foreach ($listaDeFabricantes as $fabri) { ?>
                 <option value="<?=$fabri['id']?>"> <?=$fabri['nome']?></option>
 
              <?php }  ?>
-                           
+
             </select>
         </p>
 
