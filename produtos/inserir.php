@@ -1,3 +1,24 @@
+<?php
+/* Se o botão inserir do formulário for acionado
+(ou seja, ele passará a estar definido ou existir) */
+
+require "../includes/funcoes-fabricantes.php";
+require "../includes/funcoes-produtos.php";
+
+$listaDeFabricantes = lerFabricantes($conexao);
+
+if( isset($_POST['inserir']) ){
+    $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_SPECIAL_CHARS );
+    $preco = filter_input(INPUT_POST,'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $quantidade = filter_input(INPUT_POST,'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST,'descricao', FILTER_SANITIZE_SPECIAL_CHARS );
+    $fabricanteId = filter_input(INPUT_POST,'fabricante', FILTER_SANITIZE_NUMBER_INT);
+
+inserirProduto ($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
+header("location:listar.php"); // redirecionamento
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -27,10 +48,14 @@
         <p>
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
-                <option value=""></option>
 
-                
-                
+        <!-- Obs: Nesta parte estamos resgatando os dados da tabela FABRICANTES para se completar as informações do formulário de produtos. -->
+            <?php 
+            foreach ($listaDeFabricantes as $fabri) { ?>
+                <option value="<?=$fabri['id']?>"> <?=$fabri['nome']?></option>
+
+             <?php }  ?>
+                           
             </select>
         </p>
 
@@ -51,8 +76,6 @@
 	    
         <button name="inserir">Inserir produto</button>
 	</form>	
-
-
 </div>
 
 </body>

@@ -3,7 +3,7 @@
 
 require "conecta.php";
 
-function lerProdutos($conexao){
+function lerProduto($conexao){
 
 
                 // 1) Montar a string do comando SQL
@@ -13,7 +13,14 @@ function lerProdutos($conexao){
                 // ORDER BY - ordem crescente - O ORDER BY normalmente efetua a ordenação em ordem crescente 
                 // 2) Executar o comando
 
-    $sql = "SELECT produtos.id, produtos.nome AS produto, produtos.quantidade, produtos.preco, produto.descricao, fabricantes.nome AS fabricante";
+
+    $sql = "SELECT produtos.id, produtos.nome AS produto, produtos.quantidade, produtos.preco, produtos.descricao, fabricantes.nome AS fabricante FROM produtos INNER JOIN fabricantes
+    ON produtos.fabricante_id = fabricantes.id ORDER BY produto";
+
+    // após o ON é a descrição da chave estrangeira
+    // é possível testar este comando SQL no PHP Myadimin
+    // Observação na aula, faltou uma letra "S" na descrição do código, e houve que o SQL lido pelo PHP MYadmin, funcionou, corrigiu...
+        //Já na página PHP acusou o erro. O professor ajudou a identificá-lo, e corrigí-lo.
 
     // Colocar o AS para não ter que ficar repetindo. 
     // esta estratégia é porque iremos usar um ARRAY em breve e ficará muito extenso escrever, então colocando um apelido, o código fica mais limpo.
@@ -36,14 +43,19 @@ function lerProdutos($conexao){
                 //var_dump(lerProdutos($conexao)); // teste
 
 
-function inseriProduto($conexao, $nome){
-    $sql = "INSERT INTO fabricantes(nome) VALUES('$nome')";
+function inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId){
+    //em cima a gente cria os nomes
+    $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricante_id) VALUES('$nome', $preco, $quantidade, '$descricao', $fabricanteId)";
+    //na descrição do comando, oberva-se que as variáveis com textos estão com aspas, as numéricas não.
+    
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 
-function lerUmFabricante($conexao, $id){
+
+
+function lerUmProduto($conexao, $id){
     // Montagem do comando SQL com o parâmetro id
-    $sql = "SELECT id, nome FROM fabricantes WHERE id = $id";
+    $sql = "SELECT id, nome FROM produtos WHERE id = $id";
     
     // Execução do comando e armazenamento do resultado
     $resultado = mysqli_query($conexao, $sql) 
@@ -51,20 +63,25 @@ function lerUmFabricante($conexao, $id){
 
     // Retornando para fora da função o resultado como array assoc.
     return mysqli_fetch_assoc($resultado);
-} // final lerUmFabricante
+} // final lerUmProduto
 
 
 
 
-function atualizarFabricante($conexao, $id, $nome){
-    $sql = "UPDATE fabricantes SET nome = '$nome' WHERE id = $id";
+
+
+function atualizarProduto($conexao, $id, $nome){
+    $sql = "UPDATE produtos SET nome = '$nome' WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
-} // final atualizarFabricante
+} // final atualizarProdutos
 
 
 
-function excluirFabricante($conexao, $id) {
-    $sql = "DELETE FROM fabricantes WHERE id = $id";
+
+
+
+function excluirProduto($conexao, $id) {
+    $sql = "DELETE FROM produtos WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 

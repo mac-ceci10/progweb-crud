@@ -1,6 +1,6 @@
 <?php
 require '../includes/funcoes-produtos.php';
-$listaDeProdutos = lerProdutos($conexao);
+$listaDeProdutos = lerProduto($conexao);
 // var_dump($listaDeProdutos);
 ?>
 
@@ -28,12 +28,17 @@ $listaDeProdutos = lerProdutos($conexao);
     <?php foreach ($listaDeProdutos as $produto) {?>
 
     <ul>
-        <li><b>Nome:</b> <?=$produto['nome']?></li>
+        <li><b>Nome:</b> <?=$produto['produto']?></li>
+    <!-- antes era nome e agora é produto -->
         <li><b>Preço:</b> <?=$produto['preco']?> </li>
         <li><b>Quantidade:</b><?=$produto['quantidade']?> </li>
         <li><b>Descrição:</b> <?=$produto['descricao']?> </li>
-        <li><b>Fabricante:</b><?=$produto['fabricante_id']?> </li>
+        <li><b>Fabricante:</b><?=$produto['fabricante']?> </li>
+    <!-- antes era fabricante_id e agora é fabricante -->
     </ul>
+
+    <a href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a>
+    <a href="excluir.php?id=<?=$produto['id']?>">Excluir</a>
 
     <?php }?>
 
