@@ -1,6 +1,7 @@
 <?php
 require "../includes/funcoes-fabricantes.php";
 $listaDeFabricantes = lerFabricantes($conexao);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
