@@ -74,8 +74,10 @@ function lerUmProduto($conexao, $id){
 
 
 
-function atualizarProduto($conexao, $id, $nome){
-    $sql = "UPDATE produtos SET nome = '$nome' WHERE id = $id";
+function atualizarProduto($conexao, $id, $nome, $preco, $descricao, $quantidade, $fabricanteId){
+    $sql = "UPDATE produtos SET nome = '$nome' , preco = $preco, descricao = '$descricao', quantidade = $quantidade, fabricante_Id = $fabricanteId WHERE id = $id";
+
+    // $sql = "UPDATE produtos SET nome = '$nome' WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 } // final atualizarProdutos
 
@@ -90,6 +92,12 @@ function excluirProduto($conexao, $id) {
 }
 
 
+
+
+function formataMoeda($valor){
+    return " R$ ".number_format($valor, 2, ",", ".")." reais ";
+}
+//5.000 -> R$ 5.000,00
 
 
 

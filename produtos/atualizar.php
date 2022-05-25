@@ -4,7 +4,13 @@ require "../includes/funcoes-produtos.php";
 
 $listaDeFabricantes = lerFabricantes($conexao);
 
-if( isset($_POST['inserir']) ){
+// Capturar o parâmetro id da URL
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+// Chamamos a função que irá retornar os dados de UM FABRICANTE
+$produto = lerUmProduto($conexao, $id);
+
+
+if( isset($_POST['atualizar']) ){
     $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_SPECIAL_CHARS );
     $preco = filter_input(INPUT_POST,'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $quantidade = filter_input(INPUT_POST,'quantidade', FILTER_SANITIZE_NUMBER_INT);
@@ -12,6 +18,9 @@ if( isset($_POST['inserir']) ){
     $fabricanteId = filter_input(INPUT_POST,'fabricante', FILTER_SANITIZE_NUMBER_INT);
 
 
+    atualizarProduto($conexao, $id, $nome, $preco, $descricao, $quantidade, $fabricanteId);
+    header("location:listar.php"); // redirecionamento
+    }
 
 
     // $number = $preco;
@@ -20,23 +29,7 @@ if( isset($_POST['inserir']) ){
     // setlocale(LC_MONETARY, 'pt-BR');
     // echo money_format('%i', $number). "\n";
     // // USD 1,234.56
-
-
-
-
-inserirProduto ($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
-header("location:listar.php"); // redirecionamento
-}
-
-
-
-// Capturar o parâmetro id da URL
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
-
-
-// Chamamos a função que irá retornar os dados de UM FABRICANTE
-$produto = lerUmProduto($conexao, $id);
+    
 
 
 ?>
