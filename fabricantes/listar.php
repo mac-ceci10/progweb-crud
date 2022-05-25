@@ -9,24 +9,25 @@ $listaDeFabricantes = lerFabricantes($conexao);
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> Fabricantes | SELECT - CRUD com PHP e MySQL </title>
-<link href="../css/style.css" rel="stylesheet">
+<!-- <link href="../css/style.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container">
     <h1>Fabricantes | SELECT -
-    <a href="../index.php">Home</a> </h1>
+    <a class="btn btn-warning" href="../index.php">Home</a> </h1>
 </div>
       
 
 <div class="container">
     
     <h2>Lendo e carregando todos os fabricantes</h2>
-    <p><a href="inserir.php">Inserir</a></p>    
+    <p><a class="btn btn-warning" href="inserir.php">Inserir</a></p>    
 
-    <table>
+    <table class="table table-striped">
         <caption> Lista de Fabricantes </caption>
-        <thead>
+        <thead class=" thead-dark">
             <tr>
                 <th>Nome</th>
                 <th>Operação</th>
@@ -41,8 +42,8 @@ foreach( $listaDeFabricantes as $fabricante ){ ?>
             <tr>
                 <td> <?=$contador.": ". $fabricante["nome"]?> </td>
                 <td> 
-<a href="atualizar.php?id=<?=$fabricante["id"]?>">Atualizar</a> 
-- <a href="excluir.php?id=<?=$fabricante["id"]?>">Excluir</a>
+<a class="btn btn-success" href="atualizar.php?id=<?=$fabricante["id"]?>">Atualizar</a> 
+- <a class="btn btn-danger" href="excluir.php?id=<?=$fabricante["id"]?>">Excluir</a>
                 </td>
             </tr> 
 <?php 
